@@ -23,9 +23,17 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-$app->withFacades();
+$app->withFacades(true, [
+    'Tymon\JWTAuth\Facades\JWTAuth' => 'JWTAuth',
+    'Tymon\JWTAuth\Facades\JWTFactory' => 'JWTFactory',
+]);
 
 $app->withEloquent();
+
+// Force HTTPS URL generation
+if (stripos(env('APP_URL'), 'https://') === 0) {
+    \Illuminate\Support\Facades\URL::forceScheme('https');
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +68,9 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('auth');
+$app->configure('jwt');
+$app->configure('swagger-lume');
 
 /*
 |--------------------------------------------------------------------------
@@ -72,9 +83,9 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    App\Http\Middleware\TrustProxies::class,
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
@@ -94,6 +105,7 @@ $app->routeMiddleware([
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(App\Providers\RepositoryServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

@@ -1,15 +1,120 @@
-# Lumen PHP Framework
+# Blog API
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
+A RESTful API built with Lumen framework for managing blog posts with JWT authentication.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Features
 
-> **Note:** In the years since releasing Lumen, PHP has made a variety of wonderful performance improvements. For this reason, along with the availability of [Laravel Octane](https://laravel.com/docs/octane), we no longer recommend that you begin new projects with Lumen. Instead, we recommend always beginning new projects with [Laravel](https://laravel.com).
+- JWT Authentication
+- RESTful API endpoints for posts management
+- OpenAPI/Swagger documentation
+- Standardized API responses using ApiResponseTrait
+- Formatted validation error messages
+- Repository pattern for data access
 
-## Official Documentation
+## Installation
+
+1. Clone the repository
+2. Run `composer install`
+3. Copy `.env.example` to `.env` and configure your database
+4. Run migrations: `php artisan migrate`
+5. Generate JWT secret: `php artisan jwt:secret`
+
+## API Documentation
+
+### Accessing Swagger UI
+
+The API documentation is available via Swagger UI at:
+
+```
+http://your-domain/api/documentation
+```
+
+### API Endpoints
+
+#### Authentication
+- `POST /auth/login` - Login user
+- `POST /auth/logout` - Logout user (requires authentication)
+- `POST /auth/refresh` - Refresh JWT token (requires authentication)
+- `GET /auth/me` - Get authenticated user (requires authentication)
+
+#### Posts
+- `GET /posts` - Get all posts
+- `POST /posts` - Create a new post (requires authentication)
+- `GET /posts/{id}` - Get a specific post
+- `PUT /posts/{id}` - Update a post (requires authentication)
+- `DELETE /posts/{id}` - Delete a post (requires authentication)
+
+### API Response Format
+
+All API responses follow a standardized format:
+
+#### Success Response
+```json
+{
+    "message": "Success message",
+    "statusCode": 200,
+    "status": "OK",
+    "data": {}
+}
+```
+
+#### Error Response
+```json
+{
+    "message": "Error message",
+    "statusCode": 400,
+    "status": "Bad Request",
+    "errors": {}
+}
+```
+
+#### Validation Error Response
+```json
+{
+    "message": "The email field is required. (and 2 more errors)",
+    "statusCode": 422,
+    "status": "Unprocessable Entity",
+    "errors": {
+        "email": ["The email field is required."],
+        "password": ["The password field is required."]
+    }
+}
+```
+
+## Configuration
+
+### Dynamic API Server URL
+
+The Swagger documentation uses the `L5_SWAGGER_CONST_HOST` constant which can be configured in your `.env` file:
+
+```env
+APP_URL=http://localhost:8000
+L5_SWAGGER_CONST_HOST=http://localhost:8000
+```
+
+### Generating Documentation
+
+To regenerate the Swagger documentation after making changes to annotations:
+
+```bash
+php artisan swagger-lume:generate
+```
+
+## ApiResponseTrait
+
+The `ApiResponseTrait` provides standardized response methods:
+
+- `success($data, $message, $statusCode)` - Return success response
+- `error($message, $data, $statusCode)` - Return error response
+
+Both methods automatically handle:
+- JsonResource responses
+- Paginated responses
+- Standard array/object responses
+
+## Lumen Framework
+
+Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
 
 Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
 

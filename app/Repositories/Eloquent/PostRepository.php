@@ -7,26 +7,19 @@ use App\Repositories\Contracts\PostRepositoryInterface;
 
 class PostRepository implements PostRepositoryInterface
 {
-    protected $model;
-
-    public function __construct(Post $model)
-    {
-        $this->model = $model;
-    }
-
     public function all()
     {
-        return $this->model->latest()->get();
+        return Post::latest()->get();
     }
 
     public function find($id)
     {
-        return $this->model->findOrFail($id);
+        return Post::findOrFail($id);
     }
 
     public function create(array $data)
     {
-        return $this->model->create($data);
+        return Post::create($data);
     }
 
     public function update($id, array $data)
@@ -39,6 +32,6 @@ class PostRepository implements PostRepositoryInterface
 
     public function delete($id)
     {
-        return $this->model->destroy($id);
+        return Post::destroy($id);
     }
 }
