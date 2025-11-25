@@ -32,10 +32,10 @@ http://your-domain/api/documentation
 ### API Endpoints
 
 #### Authentication
-- `POST /auth/login` - Login user
-- `POST /auth/logout` - Logout user (requires authentication)
-- `POST /auth/refresh` - Refresh JWT token (requires authentication)
-- `GET /auth/me` - Get authenticated user (requires authentication)
+- `POST /login` - Login user
+- `POST /logout` - Logout user (requires authentication)
+- `POST /refresh` - Refresh JWT token (requires authentication)
+- `GET /me` - Get authenticated user (requires authentication)
 
 #### Posts
 - `GET /posts` - Get all posts

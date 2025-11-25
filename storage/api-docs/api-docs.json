@@ -10,19 +10,19 @@
     },
     "servers": [
         {
-            "url": "https://blog.msulemvn.test",
+            "url": "https://blog.msulemvn.test/api",
             "description": "API Server"
         }
     ],
     "paths": {
-        "/auth/login": {
+        "/login": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Login user",
                 "description": "Authenticate user and return JWT token",
-                "operationId": "8cb7742ae98d0990acb2907c4e00bf24",
+                "operationId": "2dd578ff7aba2721293dac66833b27d1",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -160,14 +160,14 @@
                 }
             }
         },
-        "/auth/me": {
-            "get": {
+        "/me": {
+            "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Get authenticated user",
                 "description": "Get the currently authenticated user's information",
-                "operationId": "a9c495788506b114956e3f509e5d90a2",
+                "operationId": "af3b8d149797532336b3d65ef346c917",
                 "responses": {
                     "200": {
                         "description": "User retrieved successfully",
@@ -234,14 +234,14 @@
                 ]
             }
         },
-        "/auth/logout": {
+        "/logout": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Logout user",
                 "description": "Invalidate the user's JWT token",
-                "operationId": "0d29c740dc06d77602af8095bf4654cc",
+                "operationId": "68a6108af04af5e3bc1ea68a6c6f1299",
                 "responses": {
                     "200": {
                         "description": "Successfully logged out",
@@ -291,14 +291,14 @@
                 ]
             }
         },
-        "/auth/refresh": {
+        "/refresh": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Refresh JWT token",
                 "description": "Get a new JWT token using the current token",
-                "operationId": "f6c9683ed975ace7d035a09e6e2a9332",
+                "operationId": "0c3ea3c61aed881016646810460499e9",
                 "responses": {
                     "200": {
                         "description": "Token refreshed successfully",

@@ -17,7 +17,7 @@ class AuthController extends Controller
      * Get a JWT via given credentials.
      *
      * @OA\Post(
-     *     path="/auth/login",
+     *     path="/login",
      *     tags={"Authentication"},
      *     summary="Login user",
      *     description="Authenticate user and return JWT token",
@@ -102,8 +102,8 @@ class AuthController extends Controller
     /**
      * Get the authenticated User.
      *
-     * @OA\Get(
-     *     path="/auth/me",
+     * @OA\POST(
+     *     path="/me",
      *     tags={"Authentication"},
      *     summary="Get authenticated user",
      *     description="Get the currently authenticated user's information",
@@ -148,7 +148,7 @@ class AuthController extends Controller
      * Log the user out (Invalidate the token).
      *
      * @OA\Post(
-     *     path="/auth/logout",
+     *     path="/logout",
      *     tags={"Authentication"},
      *     summary="Logout user",
      *     description="Invalidate the user's JWT token",
@@ -190,7 +190,7 @@ class AuthController extends Controller
      * Refresh a token.
      *
      * @OA\Post(
-     *     path="/auth/refresh",
+     *     path="/refresh",
      *     tags={"Authentication"},
      *     summary="Refresh JWT token",
      *     description="Get a new JWT token using the current token",
